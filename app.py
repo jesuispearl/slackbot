@@ -25,5 +25,5 @@ def hello():
     return'Hello World!'
 
 
-if__name__ == '__main__':
+if __name__ == '__main__':
     run(host='0.0.0.0', port=5000)
