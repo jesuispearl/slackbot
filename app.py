@@ -17,13 +17,47 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import os
-
 from bottle import run, post
+
+from pdpyras import APISession
+import requests
+import pypd
+from datetime import datetime, timedelt
+import json
+from urllib import parse as urlparse
 
 
 @post('/hello')
-def hello():
-    return 'Hello World!'
+# def hello():
+#     return 'Hello World!'
+def slack(event):
+
+    message_from_slack = dict(urlparse.parse_qsl(event["body"]))
+    response_url = message_from_slack["response_url"]
+    user_email = message_from_slack["text"]
+    message_for_slack = "*Request body _after_ decoding:*\n" + user_email
+
+    response_json = {
+        'attachments': [
+                    {
+                        'text': message_for_slack,
+                        'callback_id': "slashcommand",
+                        'actions': [
+                            {
+                                'name': 'slashcommand_bu',
+                                'text': 'A Button',
+                                'type': "button",
+                                'value': 0
+                            }
+                        ]
+                    }
+        ]
+    }
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps(response_json)
+    }
 
 
 if __name__ == '__main__':

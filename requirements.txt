@@ -4,3 +4,8 @@ gunicorn==19.9.0
 # requests==2.19.1
 # virtualenv==16.0.0
 bottle==0.12.9
+pdpyras==4.1
+pypd==1.1.0
+requests==2.24.0
+urllib3==1.25.9
+DateTime==4.3
