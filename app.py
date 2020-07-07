@@ -22,7 +22,7 @@ from bottle import run, post
 from pdpyras import APISession
 import requests
 import pypd
-from datetime import datetime, timedelt
+from datetime import datetime, timedelta
 import json
 from urllib import parse as urlparse
 
@@ -31,7 +31,6 @@ from urllib import parse as urlparse
 # def hello():
 #     return 'Hello World!'
 def slack(event):
-
     message_from_slack = dict(urlparse.parse_qsl(event["body"]))
     response_url = message_from_slack["response_url"]
     user_email = message_from_slack["text"]
